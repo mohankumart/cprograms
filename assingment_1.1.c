@@ -12,7 +12,7 @@ int main(){
 	int ft, cd, n, nt;
 	printf("Enter First Term:");
 	scanf("%d", &ft);
-	printf("Enter command difference:");
+	printf("Enter comman difference:");
 	scanf("%d", &cd);
 	printf("Enter Number of Terms:");
 	scanf("%d", &n);
