@@ -17,8 +17,8 @@ int main(){
 	printf("Enter Number of Terms:");
 	scanf("%d", &n);
 	nt = findNthTerm(ft, cd, n); 
-	printf("The nth Term is %d\n", nt);
-	printf("The sum upto to nth term is %d\n", findSumUptoNthTerm(ft, nt, n));
+	printf("n%d-th term is: %d\n", n, nt);
+	printf("sum up to to n%d-th term is %d\n", n, findSumUptoNthTerm(ft, nt, n));
 	return 0;
 }
 
