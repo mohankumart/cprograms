@@ -8,7 +8,7 @@ void swap(char *p, char*q){
 }
 
 int checkAsciiCodes(char *str){
-	if((*str >= 77 && *str <= 90)  || (*str >= 97 && *str <= 122)){
+	if((*str >= 'a' && *str <= 'z')  || (*str >= 'A' && *str <= 'Z')){
 		return 1;
 	}else{
 		return 0;
