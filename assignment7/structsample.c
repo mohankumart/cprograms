@@ -32,8 +32,8 @@ int main(){
 	//int x = (*p->c)++;
 	//printf("%d\n", x);	
 
-	int x = *p++ -> c;
-	printf("%d\n", x);
+	//int x = *p++ -> c;
+	//printf("%d\n", x);
 
 	return 0;
 }
