@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 void printArray(int *a, int size){
 	int i;
@@ -69,17 +68,31 @@ void heap_increase_key(int *a, int i, int key){
 
 }
 
+void heap_sort(int *a, int *size){
+	int i, arrayLength = *size;
+	for(i=arrayLength-1; i>0; i--){
+		exchange(a, 0, i);
+		*size = *size - 1;
+		max_heapify(a, 0, *size);		
+	}	
+
+}
+
 int main(){
-	int arr[] = {9, 6, 5, 0, 8, 2, 1, 3};
+	int arr[] = {16, 26, 15, 230, 458, 42, 211, 309};
 	int size = sizeof(arr)/sizeof(arr[0]);
 	printf("Before Heaify\n");
 	printArray(arr, size);
 	build_heap(arr, size);
 	printf("After build Heap\n");
 	printArray(arr, size);
-	printf("Max is %d\n", heap_extract_max(arr, &size));
-	printArray(arr, size);
-	heap_increase_key(arr, 3, 400);
-	printArray(arr, size);
+	heap_sort(arr, &size);
+	size = sizeof(arr)/sizeof(arr[0]);
+	printf("After Heap Sort\n");
+   printArray(arr, size);	
+	//printf("Max is %d\n", heap_extract_max(arr, &size));
+	//printArray(arr, size);
+	//heap_increase_key(arr, 3, 400);
+	//printArray(arr, size);
 	return 0;
 }
