@@ -1,10 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node {
+typedef struct node {
 	int data;
 	struct node *next;
-};
+}Node;
 
 struct node *insertAtBegining(struct node *head_ref, int data){
 	struct node *t = (struct node *)malloc(sizeof(struct node));
@@ -72,6 +72,46 @@ void deleteNode(struct node *head_ref, int data){
 	free(temp); 
 }
 
+Node *move_to_front(Node *head_ref){
+	Node *p, *q;
+	if(!head_ref || !head_ref->next)
+		return head_ref;
+	q=NULL, p=head_ref;
+	while(p->next){
+		q=p;
+		p=p->next;
+	}	
+	q->next = NULL;
+	p->next = head_ref;
+	head_ref = p;
+	return head_ref;
+}
+
+void printLinkedList(Node *head_ref){
+	if(head_ref){
+		printf("%d ", head_ref->data);
+		printLinkedList(head_ref->next);
+	}	
+}
+
+void printLinkedListInReverse(Node *head_ref){
+	if(head_ref){
+		printLinkedListInReverse(head_ref->next);
+		printf("%d ", head_ref->data);
+	}	
+}
+
+Node *reverseLinkedList(Node *current){
+	Node *prev = NULL, *next = NULL;
+	while(current){
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	return prev;
+}
+
 int main(){
 	struct node *head = NULL;
 	
@@ -85,7 +125,9 @@ int main(){
 	insertAfter(head, 20, 40);
 	insertAfter(head, 20, 50);
 	insertAfter(head, 20, 60);
-
+	insertAfter(head, 20, 70);
+	insertAfter(head, 20, 80);
+	
 	//delete begining node
 	head = deleteFromBegining(head);	
 
@@ -94,6 +136,22 @@ int main(){
 	
 	//delete node
 	deleteNode(head, 60);
-	printf("data is -->%d\n",head->next->data);	
+
+	//move to front
+	head = move_to_front(head);
+	
+	//print the linked list 
+	printLinkedList(head);
+	printf("\n");
+
+	//print the linked list in reverse order
+	printLinkedListInReverse(head);	
+	printf("\n");
+	
+	//reverse the linked list
+	head = reverseLinkedList(head);
+   printLinkedList(head);
+   printf("\n");
+
 	return 0;
 }
