@@ -112,9 +112,17 @@ Node *reverseLinkedList(Node *current){
 	return prev;
 }
 
+Node *head = NULL;
+void reverseLinkedListRecursion(Node *prev, Node *current){
+	if(current){
+		reverseLinkedListRecursion(current, current->next);
+		current->next = prev;
+	}else{
+		head = prev;
+	}
+}
+
 int main(){
-	struct node *head = NULL;
-	
 	//insert at begining
 	head = insertAtBegining(head, 10);
 
@@ -145,13 +153,17 @@ int main(){
 	printf("\n");
 
 	//print the linked list in reverse order
-	printLinkedListInReverse(head);	
-	printf("\n");
+	//printLinkedListInReverse(head);	
+	//printf("\n");
 	
 	//reverse the linked list
-	head = reverseLinkedList(head);
-   printLinkedList(head);
-   printf("\n");
-
+	//head = reverseLinkedList(head);
+   //printLinkedList(head);
+   //printf("\n");
+	
+	//reverse the linked list using recursion
+	reverseLinkedListRecursion(NULL, head);
+	printLinkedList(head);
+	printf("\n");
 	return 0;
 }
