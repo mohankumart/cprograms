@@ -79,6 +79,62 @@ void B(Node *t){
 	}
 }
 
+int nodeCount(Node *root_ref){
+	if(root_ref){
+		return (1+nodeCount(root_ref->left)+nodeCount(root_ref->right));
+	}else{
+		return 0;
+	}
+}
+
+int leafNodesCount(Node *root_ref){
+	if(root_ref == NULL)
+		return 0;
+	if(root_ref->left == NULL && root_ref->right == NULL)
+		return 1;
+	else
+		return leafNodesCount(root_ref->left)+leafNodesCount(root_ref->right);
+}
+
+int nonLeafNodesCount(Node *root_ref){
+	if(!root_ref)
+		return 0;
+	if(!root_ref->left && !root_ref->right)
+		return 0;
+	else
+		return 1+nonLeafNodesCount(root_ref->left)+nonLeafNodesCount(root_ref->right);
+}
+
+int fullNodes(Node *root_ref){
+	if(!root_ref)
+		return 0;
+	if(!root_ref->left && !root_ref->right)
+		return 0;
+	return fullNodes(root_ref->left) + fullNodes(root_ref->right) + ((root_ref->left && root_ref->right)?1:0); 
+}
+
+int treeHeight(Node *root_ref){
+	if(!root_ref)
+		return 0;
+	if(!root_ref->left && !root_ref->right)
+		return 0;
+	int l,r;
+	l = treeHeight(root_ref->left);
+	r = treeHeight(root_ref->right);
+	return(1+ (l > r? l : r));
+}
+
+int isComplete(Node *root_ref){
+	if(root_ref == NULL)
+		return 1;
+	if(!root_ref->left && !root_ref->right)
+		return 1;
+	else if(root_ref->left && root_ref->right)
+		return (isComplete(root_ref->left) && isComplete(root_ref->right));
+	else
+		return 0;
+}
+
 int main(){
 	Node *root = NULL;
 	
@@ -115,5 +171,12 @@ int main(){
 	B(root);
 	printf("\n");	
 	
+	printf("Number of nodes in binary tree are: %d\n", nodeCount(root));	
+	printf("Number of leaf nodes in binary tree are: %d\n", leafNodesCount(root));
+	printf("Number of Non Leaf nodes in binary tree are: %d\n", nonLeafNodesCount(root));
+	printf("Number of Full Nodes in binary tree are: %d\n", fullNodes(root));
+	printf("Height of the Tree is: %d\n", treeHeight(root));
+
+	printf("Is Binary Tree is complete---->%d\n", isComplete(root));
 	return 0;
 }
