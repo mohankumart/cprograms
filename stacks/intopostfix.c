@@ -99,12 +99,41 @@ char *infixtopostfix(char *string){
 	return output;	
 }
 
+int evaluatePostfix(char *string){
+	int i,value=0,op1, op2;
+	for(i=0; string[i] !='\0'; i++){
+		if(checkifoperator(*(string+i)) == 1){
+			op2 = pop();
+			op1 = pop();
+			switch(*(string+i)){
+				case '+': 
+					push(op1 + op2);
+					break;
+				case '-':
+					push(op1 - op2);
+					break;
+				case '*':
+					push(op1 * op2);
+					break;
+				case '/':
+					push(op1 / op2);
+					break;		
+			}
+		}else{
+			push(*(string+i)-'0');
+		}		
+	}
+	return pop();
+}
+
 int main(){
 	createStack(100);
 	// read the infix string
 	char *string;
 	printf("Enter infix expression: ");
 	scanf("%s", string);
-	printf("The postfix expression: %s\n", infixtopostfix(string));
+	char *postfixNotation = infixtopostfix(string);
+	printf("The postfix expression: %s\n", postfixNotation);
+	printf("The value of expression is %d\n", evaluatePostfix(postfixNotation));
 	return 0;
 }
