@@ -55,31 +55,7 @@ void printGraph(Graph *graph){
 Graph* createGraph(int v){
 	Graph *graph = (Graph *)malloc(sizeof(Graph));
 	graph->v = v;
-	graph->array = (AdjNode *)malloc(v * sizeof(AdjNode));
+	graph->array = (AdjNode *)malloc(100 * sizeof(AdjNode));
 	return graph;
 }
 
-int main(){
-	int v;
-	
-	// Scan the number of vertices
-	printf("Enter the Number of vertices: ");
-	scanf("%d", &v);
-
-	// initialize graph
-	Graph *graph = createGraph(v);
-
-	// construct the graph based on input
-	setEdge(0,1, graph);
-	setEdge(0,4, graph);
-	setEdge(1,2, graph);
-	setEdge(1,3, graph);
-	setEdge(1,4, graph);
-	setEdge(2,3, graph);
-	setEdge(3,4, graph);
-
-	// print graph
-	printGraph(graph);
-	
-	return 0;
-}
