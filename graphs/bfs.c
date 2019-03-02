@@ -38,6 +38,18 @@ void bfs(int V){
 	printf("\n");	
 }
 
+void dfs(int v){
+	visited[v] = 1;
+	printf("%d ", v);
+	Node *t = graph->array[v].head;
+	while(t){
+    	if(visited[t->data] == 0){
+        	dfs(t->data);
+       	}
+		t= t->next;
+	}
+}
+
 int main(){
 	// Graph Creation
 	graph = createGraph(v);
@@ -53,7 +65,19 @@ int main(){
 	setEdge(6,7, graph);
 	printGraph(graph);
 	
+	int startVertex;
+	printf("Enter start vertex: ");
+	scanf("%d", &startVertex);
 	//BFS
-	bfs(0);	
+	bfs(startVertex);
+
+	int i=0;
+    for(i=0;i<v;i++){
+        visited[i] = 0;
+    }
+
+	//DFS
+	dfs(startVertex);	
+	printf("\n");	
 	return 0;
 }
