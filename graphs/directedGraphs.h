@@ -2,11 +2,12 @@
 #include<stdlib.h>
 
 typedef struct adjNode {
+	int data;
 	struct node *head;
 }AdjNode;
 
 typedef struct node {
-int data;
+	int data;
 	struct node *next;
 }Node;
 
